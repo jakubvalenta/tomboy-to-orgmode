@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+import tomboy_to_orgmode.tomboy_to_orgmode
+if __name__ == '__main__':
+    tomboy_to_orgmode.tomboy_to_orgmode.main()
