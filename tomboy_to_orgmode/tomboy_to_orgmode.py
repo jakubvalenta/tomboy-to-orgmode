@@ -33,6 +33,9 @@ def parse_note(path: str) -> Note:
         doc = BeautifulSoup(f, 'xml')
     raw_title = doc.find(name='title').text
     raw_text = doc.find(name='text').text
+    raw_text_lines = raw_text.splitlines()
+    if raw_text_lines[0] == raw_title:
+        raw_text = '\n'.join(raw_text_lines[1:])
     raw_timestamp = doc.find(name='last-change-date').text
     return Note(
         title=raw_title.strip(),
