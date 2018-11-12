@@ -1,11 +1,10 @@
 import argparse
-from datetime import datetime
 import glob
 import operator
 import os.path
 import re
 import sys
-import textwrap
+from datetime import datetime
 from typing import Iterator
 
 import attr
@@ -25,7 +24,7 @@ def find_notes_paths(dirpath: str) -> Iterator[str]:
 
 
 def parse_timestamp(s: str) -> datetime:
-    simpler = re.sub('\.\d+(\S\d+)\:(\d+)$', '\\1\\2', s)
+    simpler = re.sub(r'\.\d+(\S\d+)\:(\d+)$', '\\1\\2', s)
     return datetime.strptime(simpler, '%Y-%m-%dT%H:%M:%S%z')
 
 
@@ -49,7 +48,7 @@ def format_orgmode_entry(note: Note) -> str:
     )
     return '* {title}\n\n{content}\n'.format(
         title=note.title,
-        content=textwrap.indent(content, '  ')
+        content=content
     )
 
 
