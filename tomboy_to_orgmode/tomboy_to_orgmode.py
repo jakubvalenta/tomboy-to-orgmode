@@ -4,6 +4,7 @@ import operator
 import os.path
 import re
 import sys
+import pytz
 from datetime import datetime
 from typing import Iterator
 
@@ -22,11 +23,13 @@ def find_notes_paths(dirpath: str) -> Iterator[str]:
     globpattern = os.path.join(dirpath, '**/*.note')
     yield from sorted(glob.glob(globpattern, recursive=True))
 
+def stub_timestamp():
+    patched = datetime.now().replace(tzinfo=pytz.UTC)
+    return datetime.strftime(patched, '%Y-%m-%dT%H:%M:%S%z')
 
 def parse_timestamp(s: str) -> datetime:
     simpler = re.sub(r'\.\d+(\S\d+)\:(\d+)$', '\\1\\2', s)
     return datetime.strptime(simpler, '%Y-%m-%dT%H:%M:%S%z')
-
 
 def parse_note(path: str) -> Note:
     with open(path, 'rb') as f:
@@ -37,6 +40,8 @@ def parse_note(path: str) -> Note:
     if raw_text_lines[0] == raw_title:
         raw_text = '\n'.join(raw_text_lines[1:])
     raw_timestamp = doc.find(name='last-change-date').text
+    lcd = doc.find(name='last-change-date')
+    raw_timestamp = lcd.text if lcd else stub_timestamp()
     return Note(
         title=raw_title.strip(),
         text=raw_text.strip(),
