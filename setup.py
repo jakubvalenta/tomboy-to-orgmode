@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='tomboy-to-orgmode',
-    version='1.0.1',
+    version='1.1.0',
     description='Convert Tomboy notes to an Emacs org-mode file.',
     long_description=long_description,
     url='https://lab.saloun.cz/jakub/tomboy-to-orgmode',
