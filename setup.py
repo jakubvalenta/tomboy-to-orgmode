@@ -13,7 +13,7 @@ setup(
     version='1.1.0',
     description='Convert Tomboy notes to an Emacs org-mode file.',
     long_description=long_description,
-    url='https://lab.saloun.cz/jakub/tomboy-to-orgmode',
+    url='https://github.com/jakubvalenta/tomboy-to-orgmode',
     author='Jakub Valenta',
     author_email='jakub@jakubvalenta.cz',
     license='Apache Software License',
